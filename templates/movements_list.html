@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Product Movements - Inventory Management{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-arrow-left-right"></i> Product Movements</h2>
+    <a href="{{ url_for('movements_add') }}" class="btn btn-warning">
+        <i class="bi bi-plus-circle"></i> Add Movement
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Movement ID</th>
+                        <th>Product</th>
+                        <th>From Location</th>
+                        <th>To Location</th>
+                        <th>Quantity</th>
+                        <th>Timestamp</th>
+                        <th class="table-actions">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for movement in movements %}
+                    <tr>
+                        <td>{{ movement.movement_id }}</td>
+                        <td>{{ movement.product.name }}</td>
+                        <td>{{ movement.from_loc.name if movement.from_loc else '-' }}</td>
+                        <td>{{ movement.to_loc.name if movement.to_loc else '-' }}</td>
+                        <td>{{ movement.qty }}</td>
+                        <td>{{ movement.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td class="table-actions">
+                            <a href="{{ url_for('movements_view', movement_id=movement.movement_id) }}" class="btn btn-sm btn-info">
+                                <i class="bi bi-eye"></i> View
+                            </a>
+                            <a href="{{ url_for('movements_edit', movement_id=movement.movement_id) }}" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No movements found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

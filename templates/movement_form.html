@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }} Movement - Inventory Management{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h4>{{ action }} Product Movement</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.movement_id.label(class="form-label") }}
+                        {{ form.movement_id(class="form-control" + (" is-invalid" if form.movement_id.errors else "")) }}
+                        {% if form.movement_id.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.movement_id.errors[0] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.product_id.label(class="form-label") }}
+                        {{ form.product_id(class="form-select" + (" is-invalid" if form.product_id.errors else "")) }}
+                        {% if form.product_id.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.product_id.errors[0] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.from_location.label(class="form-label") }}
+                                {{ form.from_location(class="form-select" + (" is-invalid" if form.from_location.errors else "")) }}
+                                {% if form.from_location.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.from_location.errors[0] }}
+                                    </div>
+                                {% endif %}
+                                <small class="text-muted">Leave as "None" for incoming stock</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.to_location.label(class="form-label") }}
+                                {{ form.to_location(class="form-select" + (" is-invalid" if form.to_location.errors else "")) }}
+                                {% if form.to_location.errors %}
+                                    <div class="invalid-feedback">
+                                        {{ form.to_location.errors[0] }}
+                                    </div>
+                                {% endif %}
+                                <small class="text-muted">Leave as "None" for outgoing stock</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.qty.label(class="form-label") }}
+                        {{ form.qty(class="form-control" + (" is-invalid" if form.qty.errors else "")) }}
+                        {% if form.qty.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.qty.errors[0] }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.timestamp.label(class="form-label") }}
+                        {{ form.timestamp(class="form-control" + (" is-invalid" if form.timestamp.errors else "")) }}
+                        {% if form.timestamp.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.timestamp.errors[0] }}
+                            </div>
+                        {% endif %}
+                        <small class="text-muted">Format: YYYY-MM-DD HH:MM:SS</small>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-warning">
+                            <i class="bi bi-save"></i> Save
+                        </button>
+                        <a href="{{ url_for('movements_list') }}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

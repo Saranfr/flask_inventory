@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Inventory Management{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-light p-5 rounded-3">
+            <h1 class="display-4">Welcome to Inventory Management System</h1>
+            <p class="lead">Manage your products, locations, and track inventory movements efficiently.</p>
+            <hr class="my-4">
+            <p>Get started by managing products, locations, or viewing inventory reports.</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-3">
+        <div class="card text-center h-100">
+            <div class="card-body d-flex flex-column">
+                <i class="bi bi-box-seam fs-1 text-primary"></i>
+                <h5 class="card-title mt-3">Products</h5>
+                <p class="card-text">Add and manage product catalog</p>
+                <a href="{{ url_for('products_list') }}" class="btn btn-primary mt-auto">View Products</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100">
+            <div class="card-body d-flex flex-column">
+                <i class="bi bi-geo-alt fs-1 text-success"></i>
+                <h5 class="card-title mt-3">Locations</h5>
+                <p class="card-text">Manage warehouse locations</p>
+                <a href="{{ url_for('locations_list') }}" class="btn btn-success mt-auto">View Locations</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100">
+            <div class="card-body d-flex flex-column">
+                <i class="bi bi-arrow-left-right fs-1 text-warning"></i>
+                <h5 class="card-title mt-3">Movements</h5>
+                <p class="card-text">Track product movements</p>
+                <a href="{{ url_for('movements_list') }}" class="btn btn-warning mt-auto">View Movements</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center h-100">
+            <div class="card-body d-flex flex-column">
+                <i class="bi bi-bar-chart fs-1 text-info"></i>
+                <h5 class="card-title mt-3">Reports</h5>
+                <p class="card-text">View inventory balance</p>
+                <a href="{{ url_for('report_balance') }}" class="btn btn-info mt-auto">View Report</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

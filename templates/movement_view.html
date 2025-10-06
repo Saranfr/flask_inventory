@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}View Movement - Inventory Management{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>Movement Details</h4>
+                <a href="{{ url_for('movements_edit', movement_id=movement.movement_id) }}" class="btn btn-sm btn-warning">
+                    <i class="bi bi-pencil"></i> Edit
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 200px;">Movement ID</th>
+                        <td>{{ movement.movement_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Product</th>
+                        <td>{{ movement.product.name }} ({{ movement.product.product_id }})</td>
+                    </tr>
+                    <tr>
+                        <th>From Location</th>
+                        <td>
+                            {% if movement.from_loc %}
+                                {{ movement.from_loc.name }} ({{ movement.from_loc.location_id }})
+                            {% else %}
+                                <span class="text-muted">None (Incoming Stock)</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>To Location</th>
+                        <td>
+                            {% if movement.to_loc %}
+                                {{ movement.to_loc.name }} ({{ movement.to_loc.location_id }})
+                            {% else %}
+                                <span class="text-muted">None (Outgoing Stock)</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td><strong>{{ movement.qty }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Timestamp</th>
+                        <td>{{ movement.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    </tr>
+                </table>
+                
+                <a href="{{ url_for('movements_list') }}" class="btn btn-secondary mt-3">
+                    <i class="bi bi-arrow-left"></i> Back to Movements
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
